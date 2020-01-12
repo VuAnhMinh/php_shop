@@ -1,4 +1,13 @@
+<?php
+$conn = mysqli_connect('localhost','root','123456789','db_banhang') or die('Không thể kết nối!');
+mysqli_set_charset($conn, 'utf8');
+$_SESSION['sql'] = "SELECT * FROM products";
+$sql = "SELECT * FROM products";
+$result = mysqli_query($conn, $sql);
+$_SESSION['total'] = mysqli_num_rows($result);
+require_once 'backend-index.php';
 
+?>
 <div class="header-top">
 	<div class="container">
 		<div class="pull-left auto-width-left">
