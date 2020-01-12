@@ -25,12 +25,28 @@
 		?>
 	</div>
 	<!-- #header -->
+
+	<?php
+		session_start();
+		$conn = connect();
+		mysqli_set_charset($conn, 'utf8');
+		$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 4";
+		$result = mysqli_query($conn, $sql);
+		$row = array();
+		for ($i = 0; $i <= 4;$i++)
+			{
+				$row[i] =  mysqli_fetch_assoc($result);
+			}
+	?>
+	
+
 	<div class="rev-slider">
 		<div class="fullwidthbanner-container">
 			<div class="fullwidthbanner">
 				<div class="bannercontainer">
 					<div class="banner">
 						<ul>
+						
 							<!-- THE FIRST SLIDE -->
 							<li data-transition="boxfade" data-slotamount="20" class="active-revslide"
 								style="width: 100%; height: 100%; overflow: hidden; z-index: 18; visibility: hidden; opacity: 0;">
@@ -42,8 +58,8 @@
 									data-oheight="undefined">
 									<div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover"
 										data-bgposition="center center" data-bgrepeat="no-repeat"
-										data-lazydone="undefined" src="assets/dest/images/thumbs/1.jpg"
-										data-src="assets/dest/images/thumbs/1.jpg"
+										data-lazydone="undefined" src="image/product/<?php echo $row[0]['image'] ?>"
+										data-src="image/product/<?php echo $row[0]['image'] ?>"
 										style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('assets/dest/images/thumbs/1.jpg'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
 									</div>
 								</div>
@@ -107,8 +123,22 @@
 			</div>
 		</div>
 		<!--slider-->
+		<?php
+								
+								disconnect($conn);
+								$_SESSION['sql'] = $sqlx;
+							?>
 	</div>
 
+
+		<?php
+			session_start();
+			$conn = connect();
+			mysqli_set_charset($conn, 'utf8');
+			$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 8";
+			$result = mysqli_query($conn, $sql);
+			$num_row = mysqli_num_rows($result)
+		?>
 	<div class="container">
 		<div id="content" class="space-top-none">
 			<div class="main-content">
@@ -118,7 +148,7 @@
 						<div class="beta-products-list">
 							<h4>New Products</h4>
 							<div class="beta-products-details">
-								<p class="pull-left">438 styles found</p>
+								<p class="pull-left">Có <?php echo "$num_row" ?> sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
 
@@ -126,11 +156,6 @@
 
 
 							<?php
-							session_start();
-							$conn = connect();
-							mysqli_set_charset($conn, 'utf8');
-							$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 8";
-							$result = mysqli_query($conn, $sql);
 							while ($row = mysqli_fetch_assoc($result)) { 
 							?>
 								

@@ -18,29 +18,28 @@ function disconnect($conn){
 function get_3_newest(){
 	$conn = connect();
 	mysqli_set_charset($conn, 'utf8');
-	$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 8";
+	$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 4";
 	$result = mysqli_query($conn, $sql);
 	$i = 1;
 	while ($row = mysqli_fetch_assoc($result)) {
-		if($i == 8){ ?>
-		<div class='product-container'>
-			<a data-toggle='modal' data-target='#modal-id'>
-				<div style="text-align: center;" class='product-img'>
-					<img src='<?php echo $row['image'] ?>'>
-				</div>
-				<div class='product-info'>
-					<h4><b><?php echo $row['name'] ?></b></h4>
-					<b class='price'>Giá: <?php echo $row['unit_price'] ?> VND</b>
-					<div class='buy'>
-						<a class='btn btn-default btn-md unlike-container'>
-						<i class='glyphicon glyphicon-heart unlike'></i>
-					</a>
-					<a class='btn btn-primary btn-md cart-container'>
-					<i title='Thêm vào giỏ hàng' class='glyphicon glyphicon-shopping-cart cart-item'></i></a>
-					<a class="snip0050"><span>Mua ngay</span><i class="glyphicon glyphicon-ok"></i></a>
+		if($i == 3){ ?>
+		<div class='item active'>
+			<img src="<?php echo $row['image'] ?>">
+			<div class='container'>
+				<div class='carousel-caption'>
+					<p><a class='btn btn-md btn-primary' href='order.php?masp=<?php echo $row['id'] ?>' role='button'>Mua ngay</a></p>
 				</div>
 			</div>
-		</a></div>
+		</div>
+		<?php } else { ?>
+		<div class='item'>
+			<img src="<?php echo $row['image'] ?>">
+			<div class='container'>
+				<div class='carousel-caption'>
+					<p><a class='btn btn-md btn-primary' href='order.php?masp=<?php echo $row['id'] ?>' role='button'>Mua ngay</a></p>
+				</div>
+			</div>
+		</div>
 		<?php }
 		$i++;
 	}
