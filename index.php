@@ -30,13 +30,13 @@
 		session_start();
 		$conn = connect();
 		mysqli_set_charset($conn, 'utf8');
-		$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 4";
+		$sql = "SELECT * FROM slider ORDER BY id";
 		$result = mysqli_query($conn, $sql);
 		$row = array();
-		for ($i = 0; $i <= 4;$i++)
-			{
-				$row[i] =  mysqli_fetch_assoc($result);
-			}
+		$i=0;
+		foreach ($result as $row)
+		{
+		}
 	?>
 	
 
@@ -58,9 +58,9 @@
 									data-oheight="undefined">
 									<div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover"
 										data-bgposition="center center" data-bgrepeat="no-repeat"
-										data-lazydone="undefined" src="image/product/<?php echo $row[0]['image'] ?>"
-										data-src="image/product/<?php echo $row[0]['image'] ?>"
-										style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('assets/dest/images/thumbs/1.jpg'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
+										data-lazydone="undefined" src="image/slide/banner1.jpg"
+										data-src="image/slide/banner1.jpg"
+										style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('image/slide/banner1.jpg'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
 									</div>
 								</div>
 							</li>
@@ -126,13 +126,13 @@
 		<?php
 								
 								disconnect($conn);
-								$_SESSION['sql'] = $sqlx;
+
 							?>
 	</div>
 
 
 		<?php
-			session_start();
+
 			$conn = connect();
 			mysqli_set_charset($conn, 'utf8');
 			$sql = "SELECT * FROM products ORDER BY created_at desc LIMIT 8";
@@ -185,7 +185,6 @@
 							<?php
 								}
 								disconnect($conn);
-								$_SESSION['sql'] = $sqlx;
 							?>
 								
 									

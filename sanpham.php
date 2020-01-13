@@ -5,16 +5,16 @@
 /*require_once 'layout/second_header.php';*/
 require_once 'backend-index.php';
 $masp = "";
-if(isset($_GET['masp'])){
-	$masp = $_GET['masp'];
+if(isset($_GET['id'])){
+	$masp = $_GET['id'];
 }
 $conn = connect();
 mysqli_set_charset($conn, 'utf8');
-$sql = "SELECT * FROM sanpham sp, danhmucsp dm WHERE sp.madm = dm.madm AND masp = '".$masp."'";
+$sql = "SELECT * FROM products sp, type_products dm WHERE sp.id_type = dm.id AND sp.id = '".$masp."'";
 $result = mysqli_query($conn, $sql);
 $loaisp = "";
 while ($row = mysqli_fetch_assoc($result)) {
-	$loaisp = $row['madm'];
+	$loaisp = $row['dm.id'];
 	?>
 	<div class="container-fluid form" style="margin-top: -23px; padding: 20px">
 		<div class="row">

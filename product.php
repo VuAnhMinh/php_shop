@@ -20,6 +20,18 @@
 		include 'subpage/header.php';
 		?>
 	</div> <!-- #header -->
+<?php
+	$masp = "";
+	if(isset($_GET['masp'])){
+		$masp = $_GET['masp'];
+	}
+	$conn = connect();
+	mysqli_set_charset($conn, 'utf8');
+	$sql = "SELECT * FROM products sp, type_products dm WHERE sp.id_type = dm.id AND sp.id = '".$masp."'";
+	$result = mysqli_query($conn, $sql);
+	$loaisp = "";
+?>
+
 
 	<div class="inner-header">
 		<div class="container">
@@ -39,16 +51,19 @@
 		<div id="content">
 			<div class="row">
 				<div class="col-sm-9">
-
+					<?php
+						while ($row = mysqli_fetch_assoc($result)) {
+							$loaisp = $row['dm.id'];
+					?>
 					<div class="row">
 						<div class="col-sm-4">
-							<img src="assets/dest/images/products/6.jpg" alt="">
+							<img src="images/products/<?php echo $row['image'] ?>" alt="">
 						</div>
 						<div class="col-sm-8">
 							<div class="single-item-body">
-								<p class="single-item-title">Sample Woman Top</p>
+								<p class="single-item-title"><?php echo $row['name'] ?></p>
 								<p class="single-item-price">
-									<span>$34.55</span>
+									<span><?php echo $row['unit_price'] ?></span>
 								</p>
 							</div>
 
@@ -56,7 +71,7 @@
 							<div class="space20">&nbsp;</div>
 
 							<div class="single-item-desc">
-								<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+								<p><?php echo $row['description'] ?></p>
 							</div>
 							<div class="space20">&nbsp;</div>
 
@@ -107,6 +122,10 @@
 							<p>No Reviews</p>
 						</div>
 					</div>
+					<?php
+						}
+						disconnect($conn);
+					?>
 					<div class="space50">&nbsp;</div>
 					<div class="beta-products-list">
 						<h4>Related Products</h4>
