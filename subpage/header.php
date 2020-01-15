@@ -113,7 +113,7 @@ require_once 'backend-index.php';
 						<?php
 							while ($row = mysqli_fetch_assoc($result)) { 
 						?>
-						<li><a href="product_small_type.php?id=<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></li>
+						<li><a href="product_small_type.php?id=<?php echo $row['id'] ?>"><?php echo $row['name'] ?></a></li>
 						<?php
 								}
 								disconnect($conn);
